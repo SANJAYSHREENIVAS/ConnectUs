@@ -35,4 +35,11 @@ io.on("connection", (socket) => {
     console.log("peer:nego:done", ans);
     io.to(to).emit("peer:nego:final", { from: socket.id, ans });
   });
+
+  socket.on("user:audio:toggle", ({ room, email, isMuted }) => {
+    // Perform server-side operations related to audio toggle
+    // For example, you can broadcast the audio state change to other users in the room
+    io.to(room).emit("user:audio:toggle", { email, isMuted });
+  });
+  
 });

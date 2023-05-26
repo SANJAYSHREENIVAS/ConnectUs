@@ -1,3 +1,4 @@
+
 class PeerService {
   constructor() {
     if (!this.peer) {
@@ -34,6 +35,15 @@ class PeerService {
       const offer = await this.peer.createOffer();
       await this.peer.setLocalDescription(new RTCSessionDescription(offer));
       return offer;
+    }
+  }
+
+  async getUserMedia(constraints) {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      return stream;
+    } catch (error) {
+      console.error('Error accessing user media:', error);
     }
   }
 }
